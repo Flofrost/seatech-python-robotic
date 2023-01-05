@@ -58,12 +58,3 @@ class Robot():
             self.powerOff()
         else:
             self.__batteryLevel = batteryLevel
-
-r = Robot("bob")
-
-r.speed = 65486
-print(r)
-r.chargeBattery()
-r.powerOn()
-r.speed = 50
-print(r)
