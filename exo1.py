@@ -47,6 +47,10 @@ class Robot():
             self.__batteryLevel -= 5
             self.__speed = min(speed,300000000)
             
+    @property
+    def batteryLevel(self):
+        return self.__batteryLevel
+
     @batteryLevel.setter
     def batteryLevel(self,batteryLevel):
         if batteryLevel < 0:
@@ -60,4 +64,6 @@ r = Robot("bob")
 r.speed = 65486
 print(r)
 r.chargeBattery()
+r.powerOn()
+r.speed = 50
 print(r)
