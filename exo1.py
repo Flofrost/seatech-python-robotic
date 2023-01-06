@@ -59,11 +59,12 @@ class Robot():
         else:
             self.__batteryLevel = batteryLevel
 
-r = Robot("bob")
+if __name__ == '__main__':
+    r = Robot("bob")
 
-r.speed = 65486
-print(r)
-r.chargeBattery()
-r.powerOn()
-r.speed = 50
-print(r)
+    r.speed = 65486
+    print(r)
+    r.chargeBattery()
+    r.powerOn()
+    r.speed = 50
+    print(r)
