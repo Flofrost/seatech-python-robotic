@@ -103,13 +103,13 @@ class Robot():
             self.__batteryLevel = batteryLevel
             self.__batteryLevel = min(100,batteryLevel)
             
-    # @property
-    # def direction(self):
-    #     return self.__direction
+    @property
+    def direction(self):
+        return self.__vector
     
-    # @direction.setter
-    # def direction(self,direction):
-    #     self.__direction = direction % 360
+    @direction.setter
+    def direction(self,direction:ComplexN):
+        self.__vector = direction
 
 if __name__ == '__main__':
     r = Robot("bob")
