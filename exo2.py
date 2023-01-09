@@ -1,4 +1,4 @@
-import exo1
+from exo1 import Robot
 
 class Hooman:
     
@@ -35,6 +35,10 @@ class Hooman:
     def exist(self):
         self.digest()
         
+    @property
+    def sex(self):
+        return self.__sex
+        
 
 class Food:
 
@@ -44,23 +48,43 @@ class Food:
         self.mass = mass
             
             
-class Cyborg(exo1.Robot,Hooman):
+class Cyborg(Robot,Hooman):
     
-    def __init__(self, name="romeo"):
-        super().__init__(name)
+    def __init__(self, name="romeo", gender = 0):
+        Hooman.__init__(self, gender)
+        Robot.__init__(self, name)
 
     def __str__(self):
-        return super().__str__()
+        return Robot.__str__(self) + "\n" + Hooman.__str__(self)
 
     def fun(self):
-        pass
+        print("\
+                \r         _____   \n\
+                \r       /  ___  \ \n\
+                \r     /  /  _  \  \ \n\
+                \r   /( /( /(_)\ )\ )\ \n\
+                \r  (  \  \ ___ /  /  ) \n\
+                \r  (    \ _____ /    ) \n\
+                \r  /(               )\ \n\
+                \r |  \             /  | \n\
+                \r |    \ _______ /    | \n\
+                \r  \    / \   / \    / \n\
+                \r    \/    | |    \/ \n\
+                \r          | |  \n\
+                \r          | | \n\
+                \r          | | \n\
+            ")
 
+cyborg = Cyborg('Deux Ex Machina', 1)
 
-h = Hooman(0)
-apple = Food(170)
-tiramisu = Food(343)
-print(h)
-h.eat([apple,tiramisu])
-print(h)
-h.exist()
-print(h)
+print(cyborg.name, 'sexe', cyborg.sex)
+print('Charging battery...')
+cyborg.chargeBattery()
+print(cyborg)
+banana = Food(118); coca = Food(2000); chips = Food(340)
+cyborg.eat(banana)
+cyborg.eat([coca, chips])
+print(cyborg)
+cyborg.digest()
+print(cyborg)
+cyborg.fun()
