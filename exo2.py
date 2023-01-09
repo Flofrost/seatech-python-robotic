@@ -20,6 +20,7 @@ class Hooman:
         self.__belly -= 42
         self.__belly = max(0,self.__belly)
 
+    """CONSUME"""
     def eat(self, foods):
         try:
             iter(foods)
@@ -75,16 +76,17 @@ class Cyborg(Robot,Hooman):
                 \r          | | \n\
             ")
 
-cyborg = Cyborg('Deux Ex Machina', 1)
+if __name__ == "__main___":
+    cyborg = Cyborg('Deux Ex Machina', 1)
 
-print(cyborg.name, 'sexe', cyborg.sex)
-print('Charging battery...')
-cyborg.chargeBattery()
-print(cyborg)
-banana = Food(118); coca = Food(2000); chips = Food(340)
-cyborg.eat(banana)
-cyborg.eat([coca, chips])
-print(cyborg)
-cyborg.digest()
-print(cyborg)
-cyborg.fun()
+    print(cyborg.name, 'sexe', cyborg.sex)
+    print('Charging battery...')
+    cyborg.chargeBattery()
+    print(cyborg)
+    banana = Food(118); coca = Food(2000); chips = Food(340)
+    cyborg.eat(banana)
+    cyborg.eat([coca, chips])
+    print(cyborg)
+    cyborg.digest()
+    print(cyborg)
+    cyborg.fun()
