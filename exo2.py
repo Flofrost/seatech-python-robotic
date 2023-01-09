@@ -76,7 +76,7 @@ class Cyborg(Robot,Hooman):
                 \r          | | \n\
             ")
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     cyborg = Cyborg('Deux Ex Machina', 1)
 
     print(cyborg.name, 'sexe', cyborg.sex)
