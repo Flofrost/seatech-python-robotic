@@ -1,40 +1,6 @@
-from curses import setupterm
-from operator import mod
 from time import sleep
+from FlofrostsSuperClassStashOfEpicness import ComplexN
 import math
-
-class ComplexN():
-
-    real = 0
-    imaginary = 0
-    
-    def __init__(self,real = 0, imaginary = 0):
-        self.real = real
-        self.imaginary = imaginary
-    
-    @property
-    def modulus(self):
-        return math.sqrt(self.real ** 2 + self.imaginary ** 2)
-
-    @modulus.setter
-    def modulus(self, modulus):
-        self.setPolar(modulus, self.angle)
-    
-    @property
-    def angle(self):
-        if self.real == 0:
-            return math.pi / 2 if self.imaginary >= 0 else - math.pi / 2
-        if self.real < 0:
-            return math.atan(self.imaginary / self.real) + math.pi
-        return math.atan(self.imaginary / self.real)
-    
-    @angle.setter
-    def angle(self, angle):
-        self.setPolar(self.modulus, angle)
-
-    def setPolar(self, modulus, angle):
-        self.real = modulus * math.cos(angle)
-        self.imaginary = modulus * math.sin(angle)
 
 
 class Robot():
