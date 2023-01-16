@@ -53,12 +53,20 @@ class Laser(Projectile):
     def __init__(self, pos: ComplexN = ComplexN(0, 0), vel: ComplexN = ComplexN(0, 0)) -> None:
         super().__init__(pos, vel)
         self.icon = "+"
+        self.life = 50
 
     def updatePosition(self):
         self.pos = self.pos + self.vel
+        self.life -= 1
 
     def collisionDetection(self, map):
-        pass
+        if map[int(self.pos.imaginary)][int(self.pos.real + self.vel.real)] == "#":
+            self.vel.real *= -1
+        if map[int(self.pos.imaginary + self.vel.imaginary)][int(self.pos.real)] == "#":
+            self.vel.imaginary *= -1
+        if self.life < 0:
+            return 1
+        return 0
 
 class Arrow(Projectile):
 
@@ -71,33 +79,40 @@ class Arrow(Projectile):
     def updatePosition(self):
         self.pos = self.pos + self.vel
         self.vel.imaginary += 1
+        if self.vel.modulus > 5:
+            self.vel.modulus = 5
 
     def collisionDetection(self, map):
-        pass
+        if map[int(self.pos.imaginary)][int(self.pos.real + self.vel.real)] == "#":
+            return 1
+        if map[int(self.pos.imaginary + self.vel.imaginary)][int(self.pos.real)] == "#":
+            return 1
+        return 0
 
 
 class LightArrow(Laser,Arrow):
     
     """Bounes and Arcs"""
 
-    def __init__(self, pos: ComplexN = ComplexN(0, 0), vel: ComplexN = ComplexN(0, 0)) -> None:
-        super().__init__(pos, vel)
+    def __init__(self, pos: ComplexN = ComplexN(0, 0), vel: ComplexN = ComplexN(0, 0)):
+        Laser.__init__(self, pos, vel)
         self.icon = "~"
         
     def updatePosition(self):
         Arrow.updatePosition(self)
+        self.life -= 1
         
     def collisionDetection(self, map):
-        Laser.collisionDetection(self, map)
+        return Laser.collisionDetection(self, map)
 
 if __name__ == "__main__":
 
     wallBottom = 0.8
     wallRight = 0.9
 
-    projList = [Laser(pos=ComplexN(10,10), vel=ComplexN(1,0)), Arrow(pos=ComplexN(10,12), vel=ComplexN(3,-3))]
+    projList = [Laser(pos=ComplexN(20,10), vel=ComplexN(2,0)), Arrow(pos=ComplexN(10,12), vel=ComplexN(3,-3)), LightArrow(pos=ComplexN(5,20), vel=ComplexN(4,-4))]
 
-    while True:
+    while projList:
         print("\x1bc",end="") # clear term
         pos = get_terminal_size().columns
         y = get_terminal_size().lines
@@ -107,10 +122,16 @@ if __name__ == "__main__":
         rmvLst = []
         for proj in projList:
             proj.updatePosition()
-            frame[proj.pos.imaginary][proj.pos.real] = proj.icon
-            
+            frame[int(proj.pos.imaginary)][int(proj.pos.real)] = proj.icon
+            if proj.collisionDetection(frame):
+                rmvLst.append(proj)
+        
+        for rmv in rmvLst:
+            projList.remove(rmv)
 
         for line in frame:
             print("".join(line))
 
         sleep(0.33)
+
+    print("No more :)")
