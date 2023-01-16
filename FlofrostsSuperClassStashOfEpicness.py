@@ -1,7 +1,6 @@
 """Contains cool stuff for the exercices"""
 import math
 
-
 class ComplexN():
 
     """
@@ -20,6 +19,9 @@ class ComplexN():
         
     def __str__(self) -> str:
         return f"{self.real} + {self.imaginary} j"
+    
+    def __add__(self, other):
+        return ComplexN(self.real + other.real, self.imaginary + other.imaginary)
 
     @property
     def modulus(self):
@@ -28,7 +30,7 @@ class ComplexN():
 
     @modulus.setter
     def modulus(self, modulus):
-        self.set_polar(modulus, self.angle)
+        self.setPolar(modulus, self.angle)
 
     @property
     def angle(self):
@@ -41,9 +43,9 @@ class ComplexN():
 
     @angle.setter
     def angle(self, angle):
-        self.set_polar(self.modulus, angle)
+        self.setPolar(self.modulus, angle)
 
-    def set_polar(self, modulus, angle):
+    def setPolar(self, modulus, angle):
         """Sets the modulus and angle in one go"""
         self.real = modulus * math.cos(angle)
         self.imaginary = modulus * math.sin(angle)
