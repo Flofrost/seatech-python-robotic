@@ -6,13 +6,13 @@ EXTERNPROTO "../protos/CircleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/MattePaint.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/toys/protos/RubberDuck.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/solids/protos/SolidBox.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/sphero/bb8/protos/BB-8.proto"
+EXTERNPROTO "../protos/BB-8.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.2438568411874647 -0.02630643502123547 -0.9694543890676576 3.3087662490231904
-  position -0.8946622253884124 2.7947632346575677 3.837861797729576
+  orientation 0.7010860515773462 0.005187841370042387 -0.7130578059215158 3.1166705247483564
+  position 0.6751803840293495 1.4633508988244948 26.37410916505268
 }
 TexturedBackground {
   texture "noon_stormy_empty"
@@ -69,8 +69,14 @@ SolidBox {
 }
 BB-8 {
   translation -2.92282 3.06678 2.2513
-  rotation -0.07069033430157734 -0.009969874837753794 -0.9974484839990737 2.4542
+  rotation -0.10755098996046564 0.06078069432632029 -0.992339907368304 1.15059
+  name "Flofrost's Super Bot"
   controller "my_controller"
+  bodySlot [
+    GPS {
+      rotation 0 0 1 0.785398
+    }
+  ]
   headMass 7e-07
   maxVelocity 100
 }
