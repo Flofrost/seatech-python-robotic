@@ -1,0 +1,89 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "../protos/CircleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/MattePaint.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/toys/protos/RubberDuck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/solids/protos/SolidBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/sphero/bb8/protos/BB-8.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.20581210014566825 0.013092456428329851 -0.9785039432819378 2.968221374537597
+  position 16.98956626834931 2.987401458296331 10.539241580300097
+}
+TexturedBackground {
+  texture "noon_stormy_empty"
+}
+TexturedBackgroundLight {
+  luminosity 1.5
+}
+RubberDuck {
+  translation 3.71875895959833 3.7339445637377042 2.1782923260248417
+  rotation 0.023978053370054257 0.006549399250979409 0.9996910314322291 0.7167498040893072
+  name "duck1"
+  scale 7
+}
+RubberDuck {
+  translation -3.737307518854736 -3.6948164677236965 2.1782889743454223
+  rotation 0.005120887901832209 -0.008323563253390835 0.999952246260722 -2.2165882235671566
+  name "duck3"
+  scale 7
+  bodyColor 0.878431 0.105882 0.141176
+}
+RubberDuck {
+  translation -3.726099186714183 3.744012720703499 2.180441826392145
+  rotation 0.006507422483425519 -0.001953174155825239 0.9999769190153036 2.4027460206048987
+  name "duck4"
+  scale 7
+  bodyColor 0.878431 0.105882 0.141176
+}
+RubberDuck {
+  translation 3.730019646973723 -3.6961953468672197 2.178287632511676
+  rotation 0.02025959755950608 -0.010755067307491664 -0.9997369040072184 0.783207752197634
+  name "duck2"
+  scale 7
+  bodyColor 0.180392 0.760784 0.494118
+}
+CircleArena {
+  name "defeat arena"
+  radius 8
+  floorAppearance MattePaint {
+    baseColor 0.300008 0.0119936 0.0119936
+  }
+}
+SolidBox {
+  translation 0 0 2
+  rotation 0.707084957913509 0.707084957913509 0.007856499532372323 0
+  name "arena"
+  size 8 8 0.1
+  appearance PBRAppearance {
+    baseColor 0 0 0
+    baseColorMap ImageTexture {
+    }
+    roughness 0.5
+    metalness 0
+  }
+}
+BB-8 {
+  hidden position_0_0 -80.97156927256434
+  hidden position_0_1 -80.89238481893547
+  hidden linearVelocity_0 0.03132362760299602 -0.11972213477513236 -0.012397877820104328
+  hidden angularVelocity_0 1.3288573106975856 0.3189388097350315 0.2582065151298249
+  hidden rotation_3 0 0 -0.9999999999999999 5.5733455864093004
+  hidden position_3_0 56.79980792268069
+  hidden linearVelocity_3 0.06749486175239786 -0.28020124341675423 -0.0018692507888536155
+  hidden angularVelocity_3 1.3288419292211588 0.318904910406812 0.25821240451919564
+  hidden rotation_4 0 -1 0 6.032045149115172
+  hidden linearVelocity_4 0.06741760277089502 -0.28016213115052685 -0.0018491765633860003
+  hidden angularVelocity_4 1.3288515738385551 0.31892409454031134 0.25820985331875557
+  hidden translation_7 -0.0010867494766958472 -0.0001384278492366086 0.5341390044863505
+  hidden rotation_7 7.252537886359059e-05 2.3103629065472648e-05 -0.9999999971031459 5.432204529860873
+  hidden linearVelocity_7 0.14974808356082883 -0.6452427647161035 0.02343293425490722
+  hidden angularVelocity_7 1.3288573841576374 0.31893887300903423 0.25820711580275074
+  translation 1.286659675697712 -1.1348634652048137 2.0120901558346485
+  rotation 0.10755125735896001 -0.060780727776601505 0.9923398763384718 -1.1505904996846832
+  headMass 7e-07
+}
