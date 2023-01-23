@@ -22,6 +22,9 @@ class ComplexN():
     
     def __add__(self, other):
         return ComplexN(self.real + other.real, self.imaginary + other.imaginary)
+    
+    def __sub__(self, other):
+        return ComplexN(self.real - other.real, self.imaginary - other.imaginary)
 
     @property
     def modulus(self):
