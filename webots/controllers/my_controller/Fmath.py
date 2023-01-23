@@ -13,18 +13,39 @@ class ComplexN():
     real = 0
     imaginary = 0
 
-    def __init__(self,real = 0, imaginary = 0):
-        self.real = real
-        self.imaginary = imaginary
+    def __init__(self,real = 0, imaginary = 0, mode = 0):
+        """
+        'real' is the real part of the complex number
+        'imaginary' is the imaginary part of the complex number
+        
+        If 'mode' is set, 'real" and 'imaginary' will be interprested as 'modulus' and 'angle' respectively
+        """
+        
+        if not mode:
+            self.real = real
+            self.imaginary = imaginary
+        else:
+            self.setPolar(real,imaginary)
         
     def __str__(self) -> str:
         return f"{self.real} + {self.imaginary} j"
     
     def __add__(self, other):
-        return ComplexN(self.real + other.real, self.imaginary + other.imaginary)
+        if type(other) is ComplexN:
+            return ComplexN(self.real + other.real, self.imaginary + other.imaginary)
+        raise Exception("Must add with other ComplexN")
     
     def __sub__(self, other):
-        return ComplexN(self.real - other.real, self.imaginary - other.imaginary)
+        if type(other) is ComplexN:
+            return ComplexN(self.real - other.real, self.imaginary - other.imaginary)
+        raise Exception("Must substract with other ComplexN")
+    
+    def __mul__(self, other):
+        if type(other) is ComplexN:
+            return ComplexN(self.modulus * other.modulus, self.angle + other.angle, mode=1)
+        elif type(other) is int or type(other) is float:
+            return ComplexN(self.real * other, self.imaginary * other)
+        raise Exception("Must multiply with another ComplexN or int or float")
 
     @property
     def modulus(self):
@@ -52,3 +73,8 @@ class ComplexN():
         """Sets the modulus and angle in one go"""
         self.real = modulus * math.cos(angle)
         self.imaginary = modulus * math.sin(angle)
+        
+    def dotProduct(self, other):
+        if type(other) is ComplexN:
+            return self.real * other.real + self.imaginary * self.imaginary
+        raise Exception("Other must be ComplexN")

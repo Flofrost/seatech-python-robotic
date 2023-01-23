@@ -1,39 +1,64 @@
-import Fmath
-from controller import Robot,Motor,GPS,Accelerometer
+from Fmath import *
+from controller import Robot,Motor,GPS,Gyro
 
 arenaLim1 = [-4, -4]
 arenaLim2 = [ 4,  4]
 
 class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSUperSmashBrosGame(Robot):
     
-    __velocipy = Fmath.ComplexN(3,0)
-    __currentPos = Fmath.ComplexN(0,0)
-    __targetPos = Fmath.ComplexN(0,0)
+    __targetVel = ComplexN(3,0)
+    __targetPos = ComplexN(0,0)
+    
+    __verboseMode = "log"
 
     def __init__(self):
         super().__init__()
 
         self.__pitchMotor = Motor("body pitch motor")
         self.__yawMotor = Motor("body yaw motor")
+        self.__headMotor = Motor("head yaw motor")
         self.__pitchMotor.setPosition(float("inf"))
+        self.__headMotor.setPosition(float("inf"))
         self.__yawMotor.setPosition(float("inf"))
 
         self.__gps = GPS("gps")
         self.__gps.enable(int(self.getBasicTimeStep()))
         
-        self.__accelerometer = Accelerometer("body accelerometer")
-        self.__accelerometer.enable(int(self.getBasicTimeStep()))
+        self.__gyro = Gyro("body gyro")
+        self.__gyro.enable(int(self.getBasicTimeStep()))
+
+        if self.__verboseMode == "log":
+            self.__logFile = open("log.csv", "w")
+            self.__logFile.write("Pos X, Pos Z, angle (t-r)\n")
+            
+    def __del__(self):
+        if self.__verboseMode == "log":
+            self.__logFile.close()
 
     def __str__(self) -> str:
-        return f"X: {self.__gps.value[0]:.2f}, Z: {self.__gps.value[1]:.2f}"
+        if self.__verboseMode == "log":
+            return f"{self.__gps.value[0]:.03f},\
+                     {self.__gps.value[1]:.03f},\
+                     {self.__targetVel.angle - self.velocity.angle:.03f}\n".replace(" ","")
 
+    def goTo(self,newTargetPosition:ComplexN):
+        self.__targetPos = newTargetPosition
 
     def proceed(self):
-        # Update position according to gps
-        self.__currentPos = Fmath.ComplexN(self.__gps.value[0], self.__gps.value[1])
-        
-        self.__velocipy = self.__currentPos - self.__targetPos
+        self.__targetVel = self.position - self.__targetPos
 
-        self.__pitchMotor.setVelocity(self.__velocipy.modulus)
-        self.__yawMotor.setVelocity(self.__velocipy.angle)
-        print(self)
+        self.__pitchMotor.setVelocity(0)
+        self.__yawMotor.setVelocity(10)
+
+        print(self.__gyro.value)
+
+        if self.__verboseMode == "log":
+            self.__logFile.write(str(self))       
+        
+    @property
+    def position(self) -> ComplexN:
+        return ComplexN(self.__gps.value[0], self.__gps.value[1])
+    
+    @property
+    def velocity(self) -> ComplexN:
+        return ComplexN(self.__gps.speed_vector[0], self.__gps.speed_vector[1])
