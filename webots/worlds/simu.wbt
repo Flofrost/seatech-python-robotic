@@ -9,7 +9,6 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/irobot/create/protos/Create.proto"
 
 WorldInfo {
-  basicTimeStep 100
 }
 Viewpoint {
   orientation 0.5562969664963578 -0.5682600684103198 -0.6063119491790083 4.232637128886075
