@@ -1,6 +1,9 @@
 """Contains cool stuff for the exercices"""
 import math
 
+def sigmoid(x, slope=1, offset=0):
+    return 1 / (1 + math.exp(-slope * (x - offset)))
+
 class ComplexN():
 
     """
@@ -61,8 +64,6 @@ class ComplexN():
         """Angle in radians of the complex number"""
         if self.real == 0:
             return math.pi / 2 if self.imaginary >= 0 else - math.pi / 2
-        if self.real < 0:
-            return math.atan(self.imaginary / self.real) + math.pi
         return math.atan(self.imaginary / self.real)
 
     @angle.setter

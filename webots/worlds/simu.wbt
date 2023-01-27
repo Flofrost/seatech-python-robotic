@@ -6,13 +6,14 @@ EXTERNPROTO "../protos/CircleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/MattePaint.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/toys/protos/RubberDuck.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/solids/protos/SolidBox.proto"
-EXTERNPROTO "../protos/BB-8.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/irobot/create/protos/Create.proto"
 
 WorldInfo {
+  basicTimeStep 100
 }
 Viewpoint {
-  orientation 0.564630982511023 -0.5561856900695953 -0.6097944996065846 4.2056749953465165
-  position 1.9333614131812307 -1.7879246380207747 26.52834383134449
+  orientation 0.5562969664963578 -0.5682600684103198 -0.6063119491790083 4.232637128886075
+  position 1.032305066659159 -2.132816844050596 29.820208500608736
 }
 TexturedBackground {
   texture "noon_stormy_empty"
@@ -67,23 +68,15 @@ SolidBox {
     metalness 0
   }
 }
-BB-8 {
-  hidden translation_9 0.127873914497477 0.20343257469000237 0.4627769020893415
-  hidden rotation_9 -0.020878112990598025 -0.11313439669048472 -0.9933603136241309 4.347726502582243
-  translation 0.2748163930662372 1.4307793565039637 2.025402278198067
-  rotation -0.07845954816218245 -0.24477147745734393 0.966401067427771 -2.768745334534638
-  name "Flofrost's Super Bot"
+Create {
+  translation 1.56 1.13 2.284
+  rotation 0 0 1 -0.785395307179586
   controller "my_controller"
   bodySlot [
     InertialUnit {
       name "rotateSensor"
     }
     GPS {
-      rotation 0 0 1 0.785398
     }
   ]
-  headOffset 0
-  headRadius 0.0001
-  headMass 0.0001
-  maxVelocity 100
 }
