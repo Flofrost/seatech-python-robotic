@@ -5,7 +5,7 @@
 from controller import Robot
 from FlofrostsSuperBustedRobotControllerOfDoom import *
 
-robot = FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSUperSmashBrosGame()
+robot = FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame()
 
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())

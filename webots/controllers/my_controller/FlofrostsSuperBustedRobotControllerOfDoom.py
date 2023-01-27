@@ -1,10 +1,10 @@
 from Fmath import *
-from controller import Robot,Motor,GPS,Gyro
+from controller import Robot,Motor,GPS,InertialUnit
 
 arenaLim1 = [-4, -4]
 arenaLim2 = [ 4,  4]
 
-class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSUperSmashBrosGame(Robot):
+class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame(Robot):
     
     __targetVel = ComplexN(3,0)
     __targetPos = ComplexN(0,0)
@@ -24,8 +24,8 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSUperSmashBrosGame(
         self.__gps = GPS("gps")
         self.__gps.enable(int(self.getBasicTimeStep()))
         
-        self.__gyro = Gyro("body gyro")
-        self.__gyro.enable(int(self.getBasicTimeStep()))
+        self.__rotate = InertialUnit("rotateSensor")
+        self.__rotate.enable(int(self.getBasicTimeStep()))
 
         if self.__verboseMode == "log":
             self.__logFile = open("log.csv", "w")
@@ -39,18 +39,19 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSUperSmashBrosGame(
         if self.__verboseMode == "log":
             return f"{self.__gps.value[0]:.03f},\
                      {self.__gps.value[1]:.03f},\
-                     {self.__targetVel.angle - self.velocity.angle:.03f}\n".replace(" ","")
+                     {self.__angleError:.03f}\n".replace(" ","")
 
     def goTo(self,newTargetPosition:ComplexN):
         self.__targetPos = newTargetPosition
 
     def proceed(self):
         self.__targetVel = self.position - self.__targetPos
+        self.__angleError = self.__targetVel.angle - self.__rotate.roll_pitch_yaw[2]
 
-        self.__pitchMotor.setVelocity(0)
-        self.__yawMotor.setVelocity(10)
+        self.__pitchMotor.setVelocity(self.__targetVel.modulus / max(self.__angleError, 1))
+        self.__yawMotor.setVelocity(self.__targetVel.angle)
 
-        print(self.__gyro.value)
+        # print(self.__rotate.roll_pitch_yaw)
 
         if self.__verboseMode == "log":
             self.__logFile.write(str(self))       
