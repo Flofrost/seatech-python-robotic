@@ -70,8 +70,8 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame(
         # print(self, self.__Lmotor.getVelocity(), self.__Rmotor.getVelocity())
 
         if self.__targetDir.modulus < 0.3:
-            self.__targetPos.real = random() * 8 - 4
-            self.__targetPos.imaginary = random() * 8 - 4
+            self.__targetPos.real = random() * 5 - 2.5
+            self.__targetPos.imaginary = random() * 5 - 2.5
             print(f"Changing target to position {self.__targetPos} !!")
 
         if self.__verboseMode == "log":
