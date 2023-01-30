@@ -14,9 +14,11 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame(
     __angleErrorPID = [0, 0, 0]
     
     __verboseMode = "log"
+    __robot = "roomba"
 
     def __init__(self):
         super().__init__()
+
 
         self.__Lmotor = Motor("left wheel motor")
         self.__Lmotor.setPosition(float("inf"))
@@ -31,7 +33,7 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame(
 
         if self.__verboseMode == "log":
             self.__logFile = open("log.csv", "w")
-            self.__logFile.write("Pos X, Pos Z, rotate, dirAngle, P, I\n")
+            self.__logFile.write("Wel L, Wel R, rotate, dirAngle, P, I\n")
             
     def __del__(self):
         if self.__verboseMode == "log":
@@ -39,8 +41,8 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame(
 
     def __str__(self) -> str:
         if self.__verboseMode == "log":
-            return f"{self.__gps.value[0]:.03f},\
-                     {self.__gps.value[1]:.03f},\
+            return f"{self.__Lmotor.getVelocity() / 16:.03f},\
+                     {self.__Rmotor.getVelocity() / 16:.03f},\
                      {self.angle:.03f},\
                      {self.__targetDir.angle:.03f},\
                      {self.__angleErrorPID[0]:.03f},\
@@ -50,19 +52,17 @@ class FlofrostsSuperDuperRobotOfEpicnessThatWillTotallyWinTheSuperSmashBrosGame(
         self.__targetPos = newTargetPosition
 
     def applySpeedVector(self, vector:Fmath.ComplexN):
-        offset = pi/4
+        offset = pi/2
         slope = 3.74
-        self.__Lmotor.setVelocity(min(16, max(-16, vector.modulus * (Fmath.sigmoid(vector.angle, slope=-slope, offset=-offset) * 2 - 1))))
-        self.__Rmotor.setVelocity(min(16, max(-16, vector.modulus * (Fmath.sigmoid(vector.angle, slope= slope, offset= offset) * 2 - 1))))
+        self.__Rmotor.setVelocity(max(-16, min(16, vector.modulus * (Fmath.sigmoid(vector.angle, slope=-slope, offset= offset) * 2 - 1))))
+        self.__Lmotor.setVelocity(max(-16, min(16, vector.modulus * (Fmath.sigmoid(vector.angle, slope= slope, offset=-offset) * 2 - 1))))
 
     def proceed(self):
         self.__targetDir = self.__targetPos - self.position
         angleError = self.__targetDir.angle - self.angle
-        self.__angleErrorPID[0] =  angleError * 1
-        self.__angleErrorPID[1] += angleError * (1 / 50)
         
         correctionVelocity = Fmath.ComplexN(self.__targetDir.modulus * 10,
-                                            self.__angleErrorPID[0] + self.__angleErrorPID[1],
+                                            -angleError,
                                             mode=1)
         correctionVelocity.modulus *= max(0, correctionVelocity.dotProduct(self.__targetDir))
         self.applySpeedVector(correctionVelocity)
