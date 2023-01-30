@@ -6,13 +6,13 @@ EXTERNPROTO "../protos/CircleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/MattePaint.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/toys/protos/RubberDuck.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/solids/protos/SolidBox.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/irobot/create/protos/Create.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/sphero/bb8/protos/BB-8.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.5562969664963578 -0.5682600684103198 -0.6063119491790083 4.232637128886075
-  position 1.032305066659159 -2.132816844050596 29.820208500608736
+  orientation 0.5372527015881372 -0.5507235372405604 -0.6387981842221323 4.282460895439109
+  position 1.118085183875334 -4.910774031270745 30.907482043672445
 }
 TexturedBackground {
   texture "noon_stormy_empty"
@@ -67,10 +67,9 @@ SolidBox {
     metalness 0
   }
 }
-Create {
-  translation 1.56 1.13 2.284
-  rotation 0 0 1 -0.785395307179586
-  controller "my_controller"
+BB-8 {
+  translation 1.565 2.12004 2.54
+  rotation 0 0 1 -0.523595307179586
   bodySlot [
     InertialUnit {
       name "rotateSensor"
@@ -78,4 +77,6 @@ Create {
     GPS {
     }
   ]
+  headMass 0.001
+  maxVelocity 100
 }
